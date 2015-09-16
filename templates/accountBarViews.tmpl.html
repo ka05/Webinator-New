@@ -1,0 +1,24 @@
+<!-- Main Account bar template for if user is logged in -->
+<script type="text/html" id="account-bar-tmpl">
+  <div class="btn-group">
+    <button type="button" class="dropdown-toggle btn-sp" data-toggle="dropdown">
+      <a>
+        <img src="img/account.png" alt="account" height="15" style="padding-right:10px;">
+
+        <span data-bind="text:coreData.currUser.username"></span>
+      </a>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#" data-bind="click: function(){ fileMenu.handleMenu('account details') }">Account Details</a></li>
+      <li><a href="#" data-bind="click: function(){ fileMenu.handleMenu('projects') }">Projects</a></li>
+      <li><a href="#" data-bind="click: function(){ fileMenu.handleMenu('logout') }">Logout</a></li>
+    </ul>
+  </div>
+</script>
+
+<!-- Account bar template pre-login -->
+<script type="text/html" id="account-bar-login-tmpl">
+  <button type="button" class="btn-sp" data-bind="click: fileMenu.showLogin">
+    <a>Login</a>
+  </button>
+</script>

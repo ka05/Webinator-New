@@ -1,0 +1,186 @@
+
+<!-- Contains body of template -->
+<script type="text/html" id="modal-login-body">
+  <form class="form-horizontal" role="form">
+    <span id="login-fail-error" style="color:red;display:none;">Incorrect Username or Password! Please try again.</span>
+    <div class="form-group">
+      <label for="login-username" class="col-sm-2 control-label">Username</label>
+      <div class="col-sm-10">
+        <!-- Bind the value from the username the user entered in create account modal-->
+        <input type="email" class="form-control" id="login-username" placeholder="Username" data-bind="value:fileMenu.createAccountUsername">
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="login-password" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="login-password" placeholder="Password">
+      </div>
+    </div>
+  </form>
+  <div style="text-align:center;"><span style="color:red;">Dont have an account?</span><br><br>
+  <input type="button" class="btn btn-primary btn-important" value="Create Account" data-bind="click: function(){ fileMenu.handleMenu('create account') }"></div>
+</script>
+
+<!-- Create account template -->
+<script type="text/html" id="create-account-tmpl">
+  <form class="form-horizontal" role="form">
+    <span id="create-account-fail-error" style="color:red;display:none;" data-bind="text:fileMenu.createAccountErrorMsg"></span>
+    <div class="form-group">
+      <label for="create-account-username" class="col-sm-2 control-label">Username</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="create-account-username" placeholder="Enter Username">
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="create-account-email" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="create-account-email" placeholder="Enter Email">
+      </div>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="create-account-password" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="create-account-password" placeholder="Enter Password">
+      </div>
+    </div>
+  </form>
+</script>
+
+<script type="text/html" id="project-chooser-tmpl">
+  <h4 id="select-proj-txt">Select a Project to Open:</h4>
+  <div id="project-listing" class="btn-group btn-group-justified" data-toggle="buttons" data-bind="foreach:coreData.userProjects">
+    <label class="btn btn-default" data-bind="text:projectName">
+      <input type="radio" class="hidden" name="project-to-load" data-bind="value:projectId, attr:{ 'data-project-id':projectId, 'data-project-name':projectName }">
+    </label>
+  </div>
+  <br/><h4>Create new Project</h4>
+  <div class="form-group">
+    <label for="newProject" class="col-sm-3 control-label">Project Name</label>
+    <div class="col-sm-4"><input type="text" class="form-control" id="newProject" name="project-name" placeholder="Project Name"></div>
+    <div class="col-sm-3"><button type="button" class="btn btn-primary" onclick="createNewProject($('#newProject').val())">Create</button></div>
+    <br>
+  </div>
+</script>
+
+<script type="text/html" id="project-list-empty-tmpl">
+  <h4>Select a Project</h4>
+  <p style="color:red;">
+    You Currently have no projects</p>
+  <p>To create one click <b>File - > Create New Project</b></p>
+</script>
+
+<script type="text/html" id="project-list-tmpl">
+  <h4 id="select-proj-txt">Select a Project to Open:</h4>
+  <div id="project-listing" class="btn-group btn-group-justified" data-toggle="buttons" data-bind="foreach:coreData.userProjects">
+    <label class="btn btn-default">
+      <span data-bind="text:projectName"></span>
+      <input type="radio" class="hidden" name="project-to-load" data-bind="value:projectId, attr:{ 'data-project-id':projectId, 'data-project-name':projectName }">
+    </label>
+  </div>
+  <br/><h4>Create new Project</h4>
+  <div class="form-group">
+    <label for="newProject" class="col-sm-3 control-label">Project Name</label>
+    <div class="col-sm-4"><input type="text" class="form-control" id="newProject" name="project-name" placeholder="Project Name"></div>
+    <div class="col-sm-3"><button type="button" class="btn btn-primary" onclick="createNewProject($('#newProject').val())">Create</button></div>
+    <br>
+  </div>
+</script>
+
+<script type="text/html" id="user-info-tmpl">
+  <h3>Username: <span data-bind="text:coreData.currUser.username"></span></h3>
+  <h3>Email: <span data-bind="text:coreData.currUser.userEmail"></span></h3>
+</script>
+
+<script type="text/html" id="create-page-tmpl">
+  <form class="form-horizontal" role="form">
+    <p id="create-page-fail-error" style="color:red;display:none;">There was an error creating your page, please try again!</p>
+    <div class="form-group">
+      <label for="newPageInput" class="col-sm-4 control-label">Page Name</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="newPageInput" name="page-name" placeholder="Page Name">
+        </div>
+      </div>
+    </form>
+</script>
+
+<script type="text/html" id="create-project-tmpl">
+  <form class="form-horizontal" role="form">
+    <p id="create-project-fail-error" style="color:red;display:none;">There was an error creating your project, please try again!</p>
+    <div class="form-group">
+    <label for="newProject" class="col-sm-4 control-label">Project Name</label>
+    <div class="col-sm-6">
+    <input type="text" class="form-control" id="newProject" name="project-name" placeholder="Project Name">
+    </div>'
+    </div>'
+    </form>
+</script>
+
+<script type="text/html" id="about-modal-tmpl">
+  <div style="text-align:center;">
+    <a href="http://nova.it.rit.edu/~erw1825/DUEx/SuperUser/index.php">
+      <img src="img/webinator.png">
+    </a>
+    <h4>An easy to use WYSIWYG Web IDE</h4>
+    <div class="well">
+      <h3>Developed by: Clay Herendeen</h3>
+      <h3>Project Members / Collaborators</h3>
+      <h4>Christopher Caulfield</h4>
+      <h4>Noah Peterham</h4>
+      <h4>Tek Napal</h4>
+      <h4>Ed Willie</h4>
+    </div>
+  </div>
+</script>
+
+<script type="text/html" id="save-page-as-tmpl">
+  <h4>Filename:</h4><input id="inputFileNameToSaveAs">
+</script>
+
+<script type="text/html" id="event-creator-tmpl">
+  <div>
+    <div id="event-type-wrap" class="btn-group btn-group-justified" data-toggle="buttons">
+      <label class="btn btn-default"><input type="radio" class="hidden" name="event-type" value="click">onclick</label>
+      <label class="btn btn-default"><input type="radio" class="hidden" name="event-type" value="change">onchange</label>
+      <label class="btn btn-default"><input type="radio" class="hidden" name="event-type" value="mouseover">onmouseover</label>
+      <label class="btn btn-default"><input type="radio" class="hidden" name="event-type" value="keydown">onkeydown</label>
+      <label class="btn btn-default"><input type="radio" class="hidden" name="event-type" value="load">onload</label>
+    </div>
+    <p style="color:red;display:none;" id="event-type-selection-error">Please select an Event Type!</p>
+    <p style="color:red;display:none;" id="event-type-id-error">Please add ID first!</p>
+    <p style="color:red;display:none;" id="add-event-error">Please select an Element first!</p>
+    <div style="display:none;" class="input-group" id="id-input-div">
+      <span class="input-group-addon">Enter An ID: </span>
+      <input type="text" style="height:36px;" class="form-control" id="id-name-input">
+                              <span class="input-group-addon" style="padding:0px;">
+                                  <input type="button" value="Add ID" class="btn btn-primary" onclick="addID($(this))">
+                              </span></div>
+    <hr>
+    <div>
+      <label style="display: block;">
+        function<input type="text" class="form-control" id="funct-name" name="NewFunct" placeholder="Function Name ...">(){
+      </label>
+      <textarea style="display: block; width: 100%;" rows="5" id="funct-content" placeholder="Some JavaScript Goes Here..."></textarea>
+      <span>}</span>
+    </div>
+  </div>
+</script>
+
+<script type="text/html" id="add-id-tmpl">
+  Enter An ID: <input type="text" id="id-name-input">
+  <p style="color:red;display:none;" id="add-id-error">Please select an element first!</p>
+</script>
+
+<script type="text/html" id="add-class-tmpl">
+  Enter Class Name: <input type="text" id="class-name-input">
+  <p style="color:red;display:none;" id="add-class-error">Please select an element first!</p>
+</script>
+
+<!-- Add Placeholder Text Body for modal body Template -->
+<script type="text/html" id="add-placholder-text-tmpl">
+  <span id="placeholder-error-msg" style="display:none;">Please Enter placeholder text to be displayed in the text box!</span>
+  <input type="text" class="form-control" id="placeholder-text-input" placeholder="Placeholder Text to display"/>
+</script>
+
